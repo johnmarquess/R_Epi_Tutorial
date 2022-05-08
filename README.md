@@ -6,5 +6,7 @@ This is a repo of code to accompany the COVID Epi team tutorial.
  
 ## Resources
 
- - More examples with [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html){:target="_blank"}
- - 
+ - More examples with [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
+ - Aggregating and analyzing data with [dplyr](https://datacarpentry.org/R-genomics/04-dplyr.html)
+ - Pivoting between wide and long data with [tidyr](https://dcl-wrangle.stanford.edu/pivot-advanced.html)
+ - A decent guide to [ggplot](https://ggplot2-book.org/statistical-summaries.html)
