@@ -31,12 +31,14 @@ glimpse(NOCS_data)
 
 # select, filter, and mutate
 
-nocs <- NOCS_data %>% 
-    filter(COLLECTDATE >= dmy("01012022"), COLLECTDATE < today()) %>% 
-    select(NOTF_ID, COLLECTDATE, INDIG_STATUS, BIRTHDATE,SEX, STATUS, AGE_AT_ONSET, 
-           HHS, PHU,HOSPITALISED, Death, VACCINATION_STATUS, 
-           RES_LAT, RES_LONG, RESIDENCE_SA2) %>% 
-    mutate(week_date = floor_date(COLLECTDATE, "week", week_start = 6))
+nocs <- NOCS_data %>%
+  filter(COLLECTDATE >= dmy("01012022"), COLLECTDATE < today()) %>%
+  select(
+    NOTF_ID, COLLECTDATE, INDIG_STATUS, BIRTHDATE, SEX, STATUS, AGE_AT_ONSET,
+    HHS, PHU, HOSPITALISED, Death, VACCINATION_STATUS,
+    RES_LAT, RES_LONG, RESIDENCE_SA2
+  ) %>%
+  mutate(week_date = floor_date(COLLECTDATE, "week", week_start = 6))
 
 glimpse(nocs)
 
@@ -59,30 +61,33 @@ nocs <- nocs %>% mutate(AGE_GROUP = cut(AGE_AT_ONSET,
 # A gentle introdcution to pivoting between wide and long data
 
 this_week <- week(today())
-n_weeks_ago <- week(today())-6
+n_weeks_ago <- week(today()) - 6
 
 case_HHS_summary_n_wks <- nocs %>%
-    mutate(week_num = week(week_date)) %>% 
-    group_by(HHS, week_date, week_num) %>% 
-    tally() %>% 
-    filter(between(week_num, n_weeks_ago, this_week)) %>% 
-    ungroup() %>% 
-    select(-week_num) %>%
-    # This is especially for Diana!!!
-    mutate(HHS = str_to_title(HHS), HHS = str_replace_all(HHS, "And", "and")) %>% 
-    filter(!is.na(HHS)) %>% 
-    pivot_wider(names_from = week_date, values_from = n, values_fill = 0) %>% 
-    filter(!HHS == "Unknown")
+  mutate(week_num = week(week_date)) %>%
+  group_by(HHS, week_date, week_num) %>%
+  tally() %>%
+  filter(between(week_num, n_weeks_ago, this_week)) %>%
+  ungroup() %>%
+  select(-week_num) %>%
+  # This is especially for Diana!!!
+  mutate(HHS = str_to_title(HHS), HHS = str_replace_all(HHS, "And", "and")) %>%
+  filter(!is.na(HHS)) %>%
+  pivot_wider(names_from = week_date, values_from = n, values_fill = 0) %>%
+  filter(!HHS == "Unknown")
 
 case_HHS_summary_n_wks
 
-kable(case_HHS_summary_n_wks, format = "simple",
-      caption = "COVID-19 case numbers per HHS over previous 6 weeks")
+kable(case_HHS_summary_n_wks,
+  format = "simple",
+  caption = "COVID-19 case numbers per HHS over previous 6 weeks"
+)
 
 kable(case_HHS_summary_n_wks,
-      caption = "COVID-19 case numbers per HHS over previous 6 weeks") %>% 
-    kable_styling(full_width = F) %>% 
-    add_header_above(c(" " = 1, "Week" = this_week-n_weeks_ago))
+  caption = "COVID-19 case numbers per HHS over previous 6 weeks"
+) %>%
+  kable_styling(full_width = F) %>%
+  add_header_above(c(" " = 1, "Week" = this_week - n_weeks_ago))
 
 
 
@@ -96,9 +101,9 @@ kable(case_HHS_summary_n_wks,
 #               values_from = n,
 #               values_fill = 0) %>%
 #   pivot_longer(cols = 2:6, names_to = "AgeGroup", values_to = "Notifications") %>%
-#     ungroup() %>% 
+#     ungroup() %>%
 #     filter(year(week_date) == 2022)
-# 
-# age_rate %>% 
+#
+# age_rate %>%
 #     ggplot(. , aes(x = week_date, y = Notifications, fill=AgeGroup)) +
 #     geom_col() + theme_minimal()
