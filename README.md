@@ -6,5 +6,5 @@ This is a repo of code to accompany the COVID Epi team tutorial.
  
 ## Resources
 
- - More examples with [dyplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html).
+ - More examples with [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html){:target="\_blank"}.
  - 
