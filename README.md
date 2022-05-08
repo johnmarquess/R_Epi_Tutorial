@@ -10,4 +10,4 @@ This is a repo of code to accompany the COVID Epi team tutorial.
  - Aggregating and analyzing data with [dplyr](https://datacarpentry.org/R-genomics/04-dplyr.html)
  - Pivoting between wide and long data with [tidyr](https://dcl-wrangle.stanford.edu/pivot-advanced.html)
  - A very good resource for pivoting with [`pivot_longer` and `pivot_wide`](https://tidyr.tidyverse.org/articles/pivot.html)
- - A decent guide to [ggplot](https://ggplot2-book.org/statistical-summaries.html)
+ - An excellent guide to [ggplot](http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html)
